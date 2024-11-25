@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import categoryRoutes from './routes/categoryRoutes.mjs'
+import productRoutes from './routes/productRoutes.mjs'
 
 const app = express()
 const PORT = 5050
@@ -23,6 +24,7 @@ app.get('/', (req, res, next) => {
 // Routing wrapping dengan app.use entry point domain/api/v1/categories/
 app.use('/api/v1/categories', categoryRoutes)
 
+app.use('/api/v1/products', productRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT} http://localhost:${PORT}/`)
