@@ -66,3 +66,29 @@ VALUES
     Tetapi, membandingkan diri dengan orang lain tidak lagi menjadi hal yang baik ketika orang lain dijadikan standar 
     kualitas hidup. Bahkan, terlalu banyak membandingkan justru bisa menyebabkan hilangnya identitas diri kita, 
     memicu perasaan iri, menurunkan rasa percaya diri, dan menghambat potensi diri.</p>');
+
+
+        CREATE TABLE roles (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(60) NOT NULL,
+        access_secret BIGINT NOT NULL UNIQUE,
+        created_at DATETIME DEFAULT NOW(),
+        deleted_at DATETIME
+    );
+
+
+        -- Users
+        CREATE TABLE users (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            fullname VARCHAR(255) NOT NULL,
+            google_id VARCHAR(255) UNIQUE,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            role_id INT NOT NULL DEFAULT 1,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            deleted_at DATETIME,
+            FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            password VARCHAR(255),
+            local_auth BOOLEAN DEFAULT FALSE
+        );
+
+    INSERT INTO roles (name, access_secret) VALUES ('CLIENT', 787383722828), ('ADMIN', 787376522828);

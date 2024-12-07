@@ -1,11 +1,11 @@
 import mysql from 'mysql2/promise'
-
+import 'dotenv/config'
 const database = mysql.createPool( {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '',
-  database: 'celerates_camp_b1',
+  host:   process.env.DATABASE_HOST ??'localhost',
+  port:  process.env.DATABASE_PORT ?? 3306,
+  user:  process.env.DATABASE_USERNAME ?? 'root',
+  password: process.env.DATABASE_PASSWORD ?? '',
+  database:  process.env.DATABASE_NAME ??'celerates_camp_b1',
   waitForConnections: true,
   connectionLimit: 10,
   connectTimeout: 10000,
